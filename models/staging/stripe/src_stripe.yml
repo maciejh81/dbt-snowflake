@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+    - name: stripe
+      description: This is a replica of the Postgres database used by our app
+      database: raw
+      schema: stripe
+      tables:
+          - name: payment
+            loaded_at_field: _batched_at
+            description: Customer Payments table.
+            freshness: 
+              warn_after:
+                count: 1
+                period: day
+              error_after:
+                count: 15
+                period: day
+            
